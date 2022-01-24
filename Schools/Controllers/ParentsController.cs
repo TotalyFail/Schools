@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApi.Data;
 using SchoolApi.Models;
+using SchoolApi.Services;
 
 namespace SchoolApi.Controllers
 {
@@ -28,23 +29,6 @@ namespace SchoolApi.Controllers
         {
             return await _context.Parent.ToListAsync();
         }
-
-        // GET: api/Parents/5
-
-        [AllowAnonymous]
-        [HttpGet("{name}")]
-        public async Task<ActionResult<List<Parent>>> GetParentbyName(String name)
-        {
-            List<Parent> parents = await _context.Parent.Where(par => par.Name == name).ToListAsync();
-
-            if (parents == null)
-            {
-                return NotFound();
-            }
-
-            return parents;
-        }
-
 
         // PUT: api/Parents/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApi.Data;
 using SchoolApi.Models;
+using SchoolApi.Services;
 
 namespace SchoolApi.Controllers
 {
@@ -15,10 +17,13 @@ namespace SchoolApi.Controllers
     public class SchoolsController : ControllerBase
     {
         private readonly SchoolApiContext _context;
+        private readonly SchoolServiceImpl schoolService;
 
-        public SchoolsController(SchoolApiContext context)
+
+        public SchoolsController(SchoolApiContext context, SchoolServiceImpl schoolService)
         {
             _context = context;
+            this.schoolService = schoolService;
         }
 
         // GET: api/Schools
@@ -28,19 +33,20 @@ namespace SchoolApi.Controllers
             return await _context.School.ToListAsync();
         }
 
-        // GET: api/Schools/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<School>> GetSchool(int id)
+        [AllowAnonymous]
+        [HttpGet("{name}")]
+        public async Task<ActionResult<List<string>>> getSchoolsByParentsName(string name)
         {
-            var school = await _context.School.FindAsync(id);
+            List<string> schools = schoolService.GetSchoolByParentName(name);
 
-            if (school == null)
+            if (schools == null)
             {
                 return NotFound();
             }
 
-            return school;
+            return schools;
         }
+
 
         // PUT: api/Schools/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

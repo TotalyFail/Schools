@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using SchoolApi.Data;
+using SchoolApi.Services;
 
 namespace SchoolApi
 {
@@ -28,6 +29,10 @@ namespace SchoolApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddTransient<ParentServiceImpl>();
+            services.AddTransient<ChildServiceImpl>();
+            services.AddTransient<SchoolServiceImpl>();
 
             services.AddDbContext<SchoolApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SchoolApiContext")));

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eimis\\Desktop\\SchoolApi\\SchoolApi\\SchoolApi.csproj": {}
+    "C:\\Users\\Eimis\\Desktop\\SchoolApi\\Schools\\SchoolApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eimis\\Desktop\\SchoolApi\\SchoolApi\\SchoolApi.csproj": {
+    "C:\\Users\\Eimis\\Desktop\\SchoolApi\\Schools\\SchoolApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\SchoolApi\\SchoolApi.csproj",
+        "projectUniqueName": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\Schools\\SchoolApi.csproj",
         "projectName": "SchoolApi",
-        "projectPath": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\SchoolApi\\SchoolApi.csproj",
+        "projectPath": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\Schools\\SchoolApi.csproj",
         "packagesPath": "C:\\Users\\Eimis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\SchoolApi\\obj\\",
+        "outputPath": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\Schools\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
