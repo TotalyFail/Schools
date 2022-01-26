@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using SchoolApi.Services;
 
 namespace SchoolApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class SchoolsController : ControllerBase
@@ -33,7 +35,6 @@ namespace SchoolApi.Controllers
             return await _context.School.ToListAsync();
         }
 
-        [AllowAnonymous]
         [HttpGet("{name}")]
         public async Task<ActionResult<List<string>>> getSchoolsByParentsName(string name)
         {
