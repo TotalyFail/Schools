@@ -6,27 +6,25 @@ using SchoolApi.Helpers;
 using SchoolApi.Interfaces;
 using SchoolApi.Models;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolApi.Services
 {
-    public class UserServiceImpl : UserInterface
+    public class UserService : IUserService
     {
         private readonly AppSettings _appSettings;
         SchoolApiContext _context;
         public IConfiguration Configuration { get; }
-        public UserServiceImpl(SchoolApiContext _context, IOptions<AppSettings> appSettings, IConfiguration configuration)
+        public UserService(SchoolApiContext _context, IOptions<AppSettings> appSettings, IConfiguration configuration)
         {
             this._context = _context;
             this._appSettings = appSettings.Value;
             this.Configuration = configuration;
         }
 
+        //Generates Jwt Token for given user.
         public string GenerateJwtToken(User user)
         {
             _appSettings.Secret = Configuration.GetValue<string>("AppSettings:Secret");

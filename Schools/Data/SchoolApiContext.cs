@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using SchoolApi.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace SchoolApi.Data
 {
     public class SchoolApiContext : DbContext
     {
-        public SchoolApiContext (DbContextOptions<SchoolApiContext> options)
+        public SchoolApiContext(DbContextOptions<SchoolApiContext> options)
             : base(options)
         {
         }

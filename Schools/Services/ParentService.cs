@@ -1,23 +1,19 @@
 ﻿using SchoolApi.Data;
 using SchoolApi.Interfaces;
-using SchoolApi.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolApi.Services
 {
-    public class ParentServiceImpl : ParentInterface
+    public class ParentService : IParentService
     {
 
         SchoolApiContext _context;
 
-        public ParentServiceImpl(SchoolApiContext _context)
+        public ParentService(SchoolApiContext _context)
         {
             this._context = _context;
         }
-
 
         public List<int> GetParentsByName(string name)
         {

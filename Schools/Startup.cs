@@ -1,23 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using SchoolApi.Data;
-using SchoolApi.Services;
-using SchoolApi.Helpers;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using SchoolApi.Models;
+using SchoolApi.Data;
+using SchoolApi.Helpers;
+using SchoolApi.Services;
+using System.Text;
 
 namespace SchoolApi
 {
@@ -30,14 +22,13 @@ namespace SchoolApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<UserServiceImpl>();
-            services.AddTransient<ParentServiceImpl>();
-            services.AddTransient<ChildServiceImpl>();
-            services.AddTransient<SchoolServiceImpl>();
+            services.AddTransient<UserService>();
+            services.AddTransient<ParentService>();
+            services.AddTransient<ChildService>();
+            services.AddTransient<SchoolService>();
 
 
             services.AddDbContext<SchoolApiContext>(options =>

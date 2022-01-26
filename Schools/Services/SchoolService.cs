@@ -1,21 +1,18 @@
 ﻿using SchoolApi.Data;
 using SchoolApi.Interfaces;
-using SchoolApi.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolApi.Services
 {
-    public class SchoolServiceImpl : SchoolInterface
+    public class SchoolService : ISchoolService
     {
         SchoolApiContext _context;
 
-        ParentServiceImpl parentService;
+        ParentService parentService;
 
-        ChildServiceImpl childService;
-        public SchoolServiceImpl(SchoolApiContext _context, ParentServiceImpl parentService, ChildServiceImpl childService)
+        ChildService childService;
+        public SchoolService(SchoolApiContext _context, ParentService parentService, ChildService childService)
         {
             this._context = _context;
             this.parentService = parentService;
@@ -25,7 +22,7 @@ namespace SchoolApi.Services
         public List<string> GetSchoolByParentName(string name)
         {
             List<int> parents = parentService.GetParentsByName(name);
-            List<int> children = childService.getChildFromParentId(parents);
+            List<int> children = childService.getChildrenSchools(parents);
 
             return _context.School.Where(sch => children.Contains(sch.id))
                 .Select(sch => sch.Name)

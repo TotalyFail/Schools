@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolApi.Data;
 using SchoolApi.Models;
 using SchoolApi.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SchoolApi.Controllers
 {
@@ -19,10 +17,10 @@ namespace SchoolApi.Controllers
     public class SchoolsController : ControllerBase
     {
         private readonly SchoolApiContext _context;
-        private readonly SchoolServiceImpl schoolService;
+        private readonly SchoolService schoolService;
 
 
-        public SchoolsController(SchoolApiContext context, SchoolServiceImpl schoolService)
+        public SchoolsController(SchoolApiContext context, SchoolService schoolService)
         {
             _context = context;
             this.schoolService = schoolService;
@@ -38,7 +36,7 @@ namespace SchoolApi.Controllers
         [HttpGet("{name}")]
         public async Task<ActionResult<List<string>>> getSchoolsByParentsName(string name)
         {
-            List<string> schools = schoolService.GetSchoolByParentName(name);
+            List<string> schools = schoolService.GetSchoolByParentName(name).ToList();
 
             if (schools == null)
             {

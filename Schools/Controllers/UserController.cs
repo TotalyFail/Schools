@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using SchoolApi.Data;
 using SchoolApi.Models;
 using SchoolApi.Services;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SchoolApi.Controllers
 {
@@ -20,9 +14,9 @@ namespace SchoolApi.Controllers
     public class UserController : ControllerBase
     {
         public IConfiguration Configuration { get; }
-        private readonly UserServiceImpl userService;
+        private readonly UserService userService;
 
-        public UserController(UserServiceImpl userService, IConfiguration configuration)
+        public UserController(UserService userService, IConfiguration configuration)
         {
             this.userService = userService;
             this.Configuration = configuration;
@@ -39,7 +33,7 @@ namespace SchoolApi.Controllers
             else if (user == null)
                 return BadRequest(new { message = "User = null" });
             else if (user.password.Length < 12)
-                return BadRequest(new { message = "Password too short"});
+                return BadRequest(new { message = "Password is too short" });
 
             string token = userService.GenerateJwtToken(user);
             return Ok(token);
