@@ -1,35 +1,27 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using SchoolApi.Data;
 using SchoolApi.Helpers;
 using SchoolApi.Services;
 using System.Text;
 
-namespace SchoolApi
+namespace SchoolApi.Models
 {
-    public class Startup
+    public class StartupServiceConfiguration
     {
-        public Startup(IConfiguration Configuration)
-        {
-            this.Configuration = Configuration;
-        }
-
         public IConfiguration Configuration { get; }
+        public IServiceCollection Services { get; set; }
 
-        public void ConfigureServices(IServiceCollection Services)
+        public void ConfigureServices()
         {
             Services.AddControllers();
             Services.AddTransient<UserService>();
             Services.AddTransient<ParentService>();
             Services.AddTransient<ChildService>();
             Services.AddTransient<SchoolService>();
-
 
             Services.AddDbContext<SchoolApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SchoolApiContext")));
@@ -54,26 +46,6 @@ namespace SchoolApi
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
-            });
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
             });
         }
     }

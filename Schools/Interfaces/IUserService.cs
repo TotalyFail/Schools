@@ -4,6 +4,6 @@ namespace SchoolApi.Interfaces
 {
     interface IUserService
     {
-        public string GenerateJwtToken(User user);
+        public string GenerateJwtToken(User User);
     }
 }

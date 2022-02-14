@@ -17,31 +17,31 @@ namespace SchoolApi.Services
         private readonly AppSettings _appSettings;
         SchoolApiContext _context;
         public IConfiguration Configuration { get; }
-        public UserService(SchoolApiContext _context, IOptions<AppSettings> appSettings, IConfiguration configuration)
+        public UserService(SchoolApiContext _context, IOptions<AppSettings> _appSettings, IConfiguration Configuration)
         {
             this._context = _context;
-            this._appSettings = appSettings.Value;
-            this.Configuration = configuration;
+            this._appSettings = _appSettings.Value;
+            this.Configuration = Configuration;
         }
 
         //Generates Jwt Token for given user.
-        public string GenerateJwtToken(User user)
+        public string GenerateJwtToken(User User)
         {
             _appSettings.Secret = Configuration.GetValue<string>("AppSettings:Secret");
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var TokenHandler = new JwtSecurityTokenHandler();
+            var Key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var TokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.username)
+                    new Claim(ClaimTypes.Name, User.Username)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Key), SecurityAlgorithms.HmacSha256Signature)
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var Token = TokenHandler.CreateToken(TokenDescriptor);
 
-            return tokenHandler.WriteToken(token);
+            return TokenHandler.WriteToken(Token);
         }
     }
 }

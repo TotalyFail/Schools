@@ -14,9 +14,9 @@ namespace SchoolApi.Controllers
     {
         private readonly SchoolApiContext _context;
 
-        public ChildrenController(SchoolApiContext context)
+        public ChildrenController(SchoolApiContext _context)
         {
-            _context = context;
+            this._context = _context;
         }
 
         // GET: api/Children
@@ -28,30 +28,30 @@ namespace SchoolApi.Controllers
 
         // GET: api/Children/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Child>> GetChild(int id)
+        public async Task<ActionResult<Child>> GetChild(int Id)
         {
-            var child = await _context.Child.FindAsync(id);
+            var Child = await _context.Child.FindAsync(Id);
 
-            if (child == null)
+            if (Child == null)
             {
                 return NotFound();
             }
 
-            return child;
+            return Child;
         }
 
         // PUT: api/Children/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutChild(int id, Child child)
+        public async Task<IActionResult> PutChild(int Id, Child Child)
         {
-            if (id != child.id)
+            if (Id != Child.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(child).State = EntityState.Modified;
+            _context.Entry(Child).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace SchoolApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ChildExists(id))
+                if (!ChildExists(Id))
                 {
                     return NotFound();
                 }
@@ -76,33 +76,33 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Child>> PostChild(Child child)
+        public async Task<ActionResult<Child>> PostChild(Child Child)
         {
-            _context.Child.Add(child);
+            _context.Child.Add(Child);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetChild", new { id = child.id }, child);
+            return CreatedAtAction("GetChild", new { id = Child.Id }, Child);
         }
 
         // DELETE: api/Children/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Child>> DeleteChild(int id)
+        public async Task<ActionResult<Child>> DeleteChild(int Id)
         {
-            var child = await _context.Child.FindAsync(id);
-            if (child == null)
+            var Child = await _context.Child.FindAsync(Id);
+            if (Child == null)
             {
                 return NotFound();
             }
 
-            _context.Child.Remove(child);
+            _context.Child.Remove(Child);
             await _context.SaveChangesAsync();
 
-            return child;
+            return Child;
         }
 
-        private bool ChildExists(int id)
+        private bool ChildExists(int Id)
         {
-            return _context.Child.Any(e => e.id == id);
+            return _context.Child.Any(e => e.Id == Id);
         }
     }
 }

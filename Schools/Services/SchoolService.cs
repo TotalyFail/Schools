@@ -7,24 +7,24 @@ namespace SchoolApi.Services
 {
     public class SchoolService : ISchoolService
     {
-        SchoolApiContext _context;
+        private SchoolApiContext _context;
 
-        ParentService parentService;
+        private ParentService _parentService;
 
-        ChildService childService;
-        public SchoolService(SchoolApiContext _context, ParentService parentService, ChildService childService)
+        private ChildService _childService;
+        public SchoolService(SchoolApiContext _context, ParentService _parentService, ChildService _childService)
         {
             this._context = _context;
-            this.parentService = parentService;
-            this.childService = childService;
+            this._parentService = _parentService;
+            this._childService = _childService;
         }
 
-        public List<string> GetSchoolByParentName(string name)
+        public List<string> GetSchoolByParentName(string Name)
         {
-            List<int> parents = parentService.GetParentsByName(name);
-            List<int> children = childService.getChildrenSchools(parents);
+            List<int> Parents = _parentService.GetParentsByName(Name);
+            List<int> Children = _childService.GetChildrenSchools(Parents);
 
-            return _context.School.Where(sch => children.Contains(sch.id))
+            return _context.School.Where(sch => Children.Contains(sch.Id))
                 .Select(sch => sch.Name)
                 .ToList();
         }

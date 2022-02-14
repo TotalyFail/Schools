@@ -5,9 +5,9 @@ namespace SchoolApi.Models
     public class Child
     {
         [Key]
-        public int id { get; set; }
-        public int parent_id { get; set; }
-        public int school_id { get; set; }
+        public int Id { get; set; }
+        public int Parent_Id { get; set; }
+        public int School_Id { get; set; }
         [Required]
         public string Name { get; set; }
     }

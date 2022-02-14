@@ -14,9 +14,9 @@ namespace SchoolApi.Controllers
     {
         private readonly SchoolApiContext _context;
 
-        public ParentsController(SchoolApiContext context)
+        public ParentsController(SchoolApiContext _context)
         {
-            _context = context;
+            this._context = _context;
         }
 
         // GET: api/Parents
@@ -30,14 +30,14 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutParent(int id, Parent parent)
+        public async Task<IActionResult> PutParent(int Id, Parent Parent)
         {
-            if (id != parent.id)
+            if (Id != Parent.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(parent).State = EntityState.Modified;
+            _context.Entry(Parent).State = EntityState.Modified;
 
             try
             {
@@ -45,7 +45,7 @@ namespace SchoolApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ParentExists(id))
+                if (!ParentExists(Id))
                 {
                     return NotFound();
                 }
@@ -62,12 +62,12 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Parent>> PostParent(Parent parent)
+        public async Task<ActionResult<Parent>> PostParent(Parent Parent)
         {
-            _context.Parent.Add(parent);
+            _context.Parent.Add(Parent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetParent", new { id = parent.id }, parent);
+            return CreatedAtAction("GetParent", new { id = Parent.Id }, Parent);
         }
 
         // DELETE: api/Parents/5
@@ -88,7 +88,7 @@ namespace SchoolApi.Controllers
 
         private bool ParentExists(int id)
         {
-            return _context.Parent.Any(e => e.id == id);
+            return _context.Parent.Any(e => e.Id == id);
         }
     }
 }

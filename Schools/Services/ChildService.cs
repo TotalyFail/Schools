@@ -7,20 +7,20 @@ namespace SchoolApi.Services
 {
     public class ChildService : IChildService
     {
-        SchoolApiContext _context;
+        private SchoolApiContext _context;
 
-        ParentService parentServiceImpl;
+        private ParentService _parentServiceImpl;
 
-        public ChildService(SchoolApiContext _context, ParentService parentServiceImpl)
+        public ChildService(SchoolApiContext _context, ParentService _parentServiceImpl)
         {
             this._context = _context;
-            this.parentServiceImpl = parentServiceImpl;
+            this._parentServiceImpl = _parentServiceImpl;
         }
 
-        public List<int> getChildrenSchools(List<int> parentIds)
+        public List<int> GetChildrenSchools(List<int> ParentIds)
         {
-            return _context.Child.Where(ch => parentIds.Contains(ch.parent_id))
-               .Select(ch => ch.school_id)
+            return _context.Child.Where(ch => ParentIds.Contains(ch.Parent_Id))
+               .Select(ch => ch.School_Id)
                .ToList();
         }
     }

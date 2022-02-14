@@ -17,13 +17,13 @@ namespace SchoolApi.Controllers
     public class SchoolsController : ControllerBase
     {
         private readonly SchoolApiContext _context;
-        private readonly SchoolService schoolService;
+        private readonly SchoolService _schoolService;
 
 
-        public SchoolsController(SchoolApiContext context, SchoolService schoolService)
+        public SchoolsController(SchoolApiContext _context, SchoolService _schoolService)
         {
-            _context = context;
-            this.schoolService = schoolService;
+            this._context = _context;
+            this._schoolService = _schoolService;
         }
 
         // GET: api/Schools
@@ -34,16 +34,16 @@ namespace SchoolApi.Controllers
         }
 
         [HttpGet("{name}")]
-        public async Task<ActionResult<List<string>>> getSchoolsByParentsName(string name)
+        public async Task<ActionResult<List<string>>> GetSchoolsByParentsName(string Name)
         {
-            List<string> schools = schoolService.GetSchoolByParentName(name).ToList();
+            List<string> Schools = _schoolService.GetSchoolByParentName(Name).ToList();
 
-            if (schools == null)
+            if (Schools == null)
             {
                 return NotFound();
             }
 
-            return schools;
+            return Schools;
         }
 
 
@@ -53,7 +53,7 @@ namespace SchoolApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSchool(int id, School school)
         {
-            if (id != school.id)
+            if (id != school.Id)
             {
                 return BadRequest();
             }
@@ -83,12 +83,12 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<School>> PostSchool(School school)
+        public async Task<ActionResult<School>> PostSchool(School School)
         {
-            _context.School.Add(school);
+            _context.School.Add(School);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSchool", new { id = school.id }, school);
+            return CreatedAtAction("GetSchool", new { id = School.Id }, School);
         }
 
         // DELETE: api/Schools/5
@@ -109,7 +109,7 @@ namespace SchoolApi.Controllers
 
         private bool SchoolExists(int id)
         {
-            return _context.School.Any(e => e.id == id);
+            return _context.School.Any(e => e.Id == id);
         }
     }
 }
