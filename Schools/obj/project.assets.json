@@ -8823,23 +8823,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Eimis\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Programuotojas1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\Schools\\SchoolApi.csproj",
+      "projectUniqueName": "C:\\Users\\Programuotojas1\\Desktop\\Schools\\Schools\\Schools\\SchoolApi.csproj",
       "projectName": "SchoolApi",
-      "projectPath": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\Schools\\SchoolApi.csproj",
-      "packagesPath": "C:\\Users\\Eimis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Eimis\\Desktop\\SchoolApi\\Schools\\obj\\",
+      "projectPath": "C:\\Users\\Programuotojas1\\Desktop\\Schools\\Schools\\Schools\\SchoolApi.csproj",
+      "packagesPath": "C:\\Users\\Programuotojas1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Programuotojas1\\Desktop\\Schools\\Schools\\Schools\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Eimis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Programuotojas1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8851,6 +8847,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -8862,6 +8859,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
@@ -8904,20 +8902,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.0, 3.1.0]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[3.1.0, 3.1.0]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[3.1.0, 3.1.0]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -8926,7 +8910,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
