@@ -97,7 +97,7 @@ namespace SchoolApi.Controllers
             _context.Child.Remove(Child);
             await _context.SaveChangesAsync();
 
-            return Child;
+            return Ok();
         }
 
         private bool ChildExists(int Id)

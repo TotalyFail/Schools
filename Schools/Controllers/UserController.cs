@@ -27,11 +27,11 @@ namespace SchoolApi.Controllers
         public IActionResult Authenticate([FromBody]User Model)
         {
             User User = new User(Configuration.GetValue<string>("Auth:Username"), Configuration.GetValue<string>("Auth:Password"));
-
-            if (User.Username != Model.Username || User.Password != Model.Password)
+            
+            if (User == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
-            else if (User == null)
-                return BadRequest(new { message = "User = null" });
+            else if (User.Username != Model.Username || User.Password != Model.Password)
+                return BadRequest(new { message = "User not found" });
             else if (User.Password.Length < 12)
                 return BadRequest(new { message = "Password is too short" });
 

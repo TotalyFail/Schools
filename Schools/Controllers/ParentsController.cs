@@ -83,7 +83,7 @@ namespace SchoolApi.Controllers
             _context.Parent.Remove(parent);
             await _context.SaveChangesAsync();
 
-            return parent;
+            return Ok();
         }
 
         private bool ParentExists(int id)

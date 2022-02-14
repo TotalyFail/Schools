@@ -8,7 +8,5 @@ namespace SchoolApi.Models
         public int Id { get; set; }
         public int Parent_Id { get; set; }
         public int School_Id { get; set; }
-        [Required]
-        public string Name { get; set; }
     }
 }

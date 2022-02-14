@@ -104,7 +104,7 @@ namespace SchoolApi.Controllers
             _context.School.Remove(school);
             await _context.SaveChangesAsync();
 
-            return school;
+            return Ok();
         }
 
         private bool SchoolExists(int id)

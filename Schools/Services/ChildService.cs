@@ -9,12 +9,10 @@ namespace SchoolApi.Services
     {
         private SchoolApiContext _context;
 
-        private ParentService _parentServiceImpl;
 
-        public ChildService(SchoolApiContext _context, ParentService _parentServiceImpl)
+        public ChildService(SchoolApiContext _context)
         {
             this._context = _context;
-            this._parentServiceImpl = _parentServiceImpl;
         }
 
         public List<int> GetChildrenSchools(List<int> ParentIds)

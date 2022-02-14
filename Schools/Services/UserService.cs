@@ -24,10 +24,10 @@ namespace SchoolApi.Services
             this.Configuration = Configuration;
         }
 
+
         //Generates Jwt Token for given user.
         public string GenerateJwtToken(User User)
         {
-            _appSettings.Secret = Configuration.GetValue<string>("AppSettings:Secret");
             var TokenHandler = new JwtSecurityTokenHandler();
             var Key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var TokenDescriptor = new SecurityTokenDescriptor
