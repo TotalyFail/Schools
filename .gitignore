@@ -1,4 +1,4 @@
-.appsettings.Development.json
-bin/
-obj/
-.vs/
+appsettings.Development.json
+/bin/
+/obj/
+/.vs/
