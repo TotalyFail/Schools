@@ -14,13 +14,10 @@ namespace SchoolApi.Services
 {
     public class UserService : IUserService
     {
-        private readonly AppSettings _appSettings;
-        SchoolApiContext _context;
+
         public IConfiguration Configuration { get; }
-        public UserService(SchoolApiContext _context, IOptions<AppSettings> _appSettings, IConfiguration Configuration)
+        public UserService(IConfiguration Configuration)
         {
-            this._context = _context;
-            this._appSettings = _appSettings.Value;
             this.Configuration = Configuration;
         }
 
@@ -29,7 +26,7 @@ namespace SchoolApi.Services
         public string GenerateJwtToken(User User)
         {
             var TokenHandler = new JwtSecurityTokenHandler();
-            var Key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var Key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:Secret"));
             var TokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

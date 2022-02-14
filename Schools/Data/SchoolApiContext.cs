@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SchoolApi.Models;
 
 namespace SchoolApi.Data
 {
@@ -9,10 +10,24 @@ namespace SchoolApi.Data
         {
         }
 
-        public DbSet<SchoolApi.Models.Child> Child { get; set; }
+        public DbSet<Child> Child { get; set; }
 
-        public DbSet<SchoolApi.Models.School> School { get; set; }
+        public DbSet<School> School { get; set; }
 
-        public DbSet<SchoolApi.Models.Parent> Parent { get; set; }
+        public DbSet<Parent> Parent { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<School>().Property(x => x.Name).IsRequired();
+            modelBuilder.Entity<School>().HasKey(x => x.Id);
+
+            modelBuilder.Entity<Parent>().Property(x => x.Name).IsRequired();
+            modelBuilder.Entity<Parent>().HasKey(x => x.Id);
+
+            modelBuilder.Entity<Child>().Property(x => x.Parent_Id).IsRequired();
+            modelBuilder.Entity<Child>().Property(x => x.School_Id).IsRequired();
+            modelBuilder.Entity<Child>().HasKey(x => x.Id);
+        }
     }
 }
