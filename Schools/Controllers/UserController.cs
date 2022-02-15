@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SchoolApi.Helpers;
 using SchoolApi.Models;
 using SchoolApi.Services;
 
@@ -16,27 +17,21 @@ namespace SchoolApi.Controllers
         public IConfiguration Configuration { get; }
         private readonly UserService _userService;
 
-        public UserController(UserService _userService, IConfiguration configuration)
+        public UserController(UserService _userService, IConfiguration Configuration)
         {
             this._userService = _userService;
-            this.Configuration = configuration;
+            this.Configuration = Configuration;
         }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User Model)
         {
-            User User = new User(Configuration.GetValue<string>("Auth:Username"), Configuration.GetValue<string>("Auth:Password"));
-            
-            if (User == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-            else if (User.Username != Model.Username || User.Password != Model.Password)
-                return BadRequest(new { message = "User not found" });
-            else if (User.Password.Length < 12)
-                return BadRequest(new { message = "Password is too short" });
+            OperationResult result = _userService.Authenticate(Model);
+            if (result.Success == false)
+                return BadRequest(result.FailureMessage);
 
-            string Token = _userService.GenerateJwtToken(User);
-            return Ok(Token);
+            return Ok(_userService.GenerateJwtToken(Model));
         }
     }
 }

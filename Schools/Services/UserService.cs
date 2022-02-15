@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SchoolApi.Data;
@@ -9,6 +10,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SchoolApi.Services
 {
@@ -16,11 +18,25 @@ namespace SchoolApi.Services
     {
 
         public IConfiguration Configuration { get; }
+        public AppSettings AppSettings;
         public UserService(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
         }
 
+        public OperationResult Authenticate([FromBody] User Model)
+        {
+            User User = new User(Configuration.GetValue<string>("Auth:Username"), Configuration.GetValue<string>("Auth:Password"));
+
+            if (User == null)
+                return OperationResult.FailureResult("Username or password is incorrect");
+            else if (User.Username != Model.Username || User.Password != Model.Password)
+                return OperationResult.FailureResult("User not found"); 
+            else if (User.Password.Length < 12)
+                return OperationResult.FailureResult("Password is too short");
+
+            return OperationResult.SuccessResult();
+        }
 
         //Generates Jwt Token for given user.
         public string GenerateJwtToken(User User)

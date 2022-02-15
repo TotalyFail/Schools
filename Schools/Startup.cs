@@ -21,7 +21,6 @@ namespace SchoolApi
         }
 
         public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection Services)
         {
             Services.AddControllers();

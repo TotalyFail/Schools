@@ -34,7 +34,7 @@ namespace SchoolApi.Controllers
         }
 
         [HttpGet("{name}")]
-        public async Task<ActionResult<List<string>>> GetSchoolsByParentsName(string Name)
+        public IActionResult GetSchoolsByParentsName(string Name)
         {
             List<string> Schools = _schoolService.GetSchoolByParentName(Name).ToList();
 
@@ -43,7 +43,7 @@ namespace SchoolApi.Controllers
                 return NotFound();
             }
 
-            return Schools;
+            return Ok(Schools);
         }
 
 
