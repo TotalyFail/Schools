@@ -30,14 +30,14 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutParent(int Id, Parent Parent)
+        public async Task<IActionResult> PutParent(int id, Parent parent)
         {
-            if (Id != Parent.Id)
+            if (id != parent.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(Parent).State = EntityState.Modified;
+            _context.Entry(parent).State = EntityState.Modified;
 
             try
             {
@@ -45,7 +45,7 @@ namespace SchoolApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ParentExists(Id))
+                if (!ParentExists(id))
                 {
                     return NotFound();
                 }
@@ -62,12 +62,12 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Parent>> PostParent(Parent Parent)
+        public async Task<ActionResult<Parent>> PostParent(Parent parent)
         {
-            _context.Parent.Add(Parent);
+            _context.Parent.Add(parent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetParent", new { id = Parent.Id }, Parent);
+            return CreatedAtAction("GetParent", new { id = parent.Id }, parent);
         }
 
         // DELETE: api/Parents/5

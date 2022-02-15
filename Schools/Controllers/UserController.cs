@@ -24,13 +24,13 @@ namespace SchoolApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User Model)
+        public IActionResult Authenticate([FromBody] User model)
         {
-            OperationResult result = _userService.Authenticate(Model);
+            OperationResult result = _userService.Authenticate(model);
             if (result.Success == false)
                 return BadRequest(result.FailureMessage);
 
-            return Ok(_userService.GenerateJwtToken(Model));
+            return Ok(_userService.GenerateJwtToken(model));
         }
     }
 }

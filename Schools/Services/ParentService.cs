@@ -14,9 +14,9 @@ namespace SchoolApi.Services
             this._context = _context;
         }
 
-        public List<int> GetParentsByName(string Name)
+        public List<int> GetParentsByName(string name)
         {
-            return _context.Parent.Where(par => par.Name == Name)
+            return _context.Parent.Where(par => par.Name == name)
                 .Select(o => o.Id)
                 .ToList();
         }

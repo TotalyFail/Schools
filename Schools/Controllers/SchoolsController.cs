@@ -33,9 +33,9 @@ namespace SchoolApi.Controllers
         }
 
         [HttpGet("{name}")]
-        public IActionResult GetSchoolsByParentsName(string Name)
+        public IActionResult GetSchoolsByParentsName(string name)
         {
-            List<string> Schools = _schoolService.GetSchoolByParentName(Name).ToList();
+            List<string> Schools = _schoolService.GetSchoolByParentName(name).ToList();
 
             if (Schools == null)
             {
@@ -81,12 +81,12 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<School>> PostSchool(School School)
+        public async Task<ActionResult<School>> PostSchool(School school)
         {
-            _context.School.Add(School);
+            _context.School.Add(school);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSchool", new { id = School.Id }, School);
+            return CreatedAtAction("GetSchool", new { id = school.Id }, school);
         }
 
         // DELETE: api/Schools/5

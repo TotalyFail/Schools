@@ -22,22 +22,22 @@ namespace SchoolApi
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection Services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            Services.AddControllers();
-            Services.AddTransient<UserService>();
-            Services.AddTransient<ParentService>();
-            Services.AddTransient<ChildService>();
-            Services.AddTransient<SchoolService>();
+            services.AddControllers();
+            services.AddTransient<UserService>();
+            services.AddTransient<ParentService>();
+            services.AddTransient<ChildService>();
+            services.AddTransient<SchoolService>();
 
-            Services.AddDbContext<SchoolApiContext>(options =>
+            services.AddDbContext<SchoolApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SchoolApiContext")));
 
             var AppSettingsSection = Configuration.GetSection("AppSettings");
             var AppSettings = AppSettingsSection.Get<AppSettings>();
             var Key = Encoding.ASCII.GetBytes(AppSettings.Secret);
 
-            Services.AddAuthentication(x =>
+            services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;

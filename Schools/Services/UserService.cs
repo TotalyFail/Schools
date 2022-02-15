@@ -20,13 +20,13 @@ namespace SchoolApi.Services
             this.Configuration = Configuration;
         }
 
-        public OperationResult Authenticate([FromBody] User Model)
+        public OperationResult Authenticate([FromBody] User model)
         {
             User User = new User(Configuration.GetValue<string>("Auth:Username"), Configuration.GetValue<string>("Auth:Password"));
 
             if (User == null)
                 return OperationResult.FailureResult("Username or password is incorrect");
-            else if (User.Username != Model.Username || User.Password != Model.Password)
+            else if (User.Username != model.Username || User.Password != model.Password)
                 return OperationResult.FailureResult("User not found");
             else if (User.Password.Length < 12)
                 return OperationResult.FailureResult("Password is too short");
@@ -35,7 +35,7 @@ namespace SchoolApi.Services
         }
 
         //Generates Jwt Token for given user.
-        public string GenerateJwtToken(User User)
+        public string GenerateJwtToken(User user)
         {
             var TokenHandler = new JwtSecurityTokenHandler();
             var Key = Encoding.ASCII.GetBytes(AppSettings.Secret);
@@ -43,7 +43,7 @@ namespace SchoolApi.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, User.Username)
+                    new Claim(ClaimTypes.Name, user.Username)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Key), SecurityAlgorithms.HmacSha256Signature)

@@ -28,9 +28,9 @@ namespace SchoolApi.Controllers
 
         // GET: api/Children/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Child>> GetChild(int Id)
+        public async Task<ActionResult<Child>> GetChild(int id)
         {
-            var Child = await _context.Child.FindAsync(Id);
+            var Child = await _context.Child.FindAsync(id);
 
             if (Child == null)
             {
@@ -44,14 +44,14 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutChild(int Id, Child Child)
+        public async Task<IActionResult> PutChild(int id, Child child)
         {
-            if (Id != Child.Id)
+            if (id != child.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(Child).State = EntityState.Modified;
+            _context.Entry(child).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace SchoolApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ChildExists(Id))
+                if (!ChildExists(id))
                 {
                     return NotFound();
                 }
@@ -76,19 +76,19 @@ namespace SchoolApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Child>> PostChild(Child Child)
+        public async Task<ActionResult<Child>> PostChild(Child child)
         {
-            _context.Child.Add(Child);
+            _context.Child.Add(child);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetChild", new { id = Child.Id }, Child);
+            return CreatedAtAction("GetChild", new { id = child.Id }, child);
         }
 
         // DELETE: api/Children/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Child>> DeleteChild(int Id)
+        public async Task<ActionResult<Child>> DeleteChild(int id)
         {
-            var Child = await _context.Child.FindAsync(Id);
+            var Child = await _context.Child.FindAsync(id);
             if (Child == null)
             {
                 return NotFound();
@@ -100,9 +100,9 @@ namespace SchoolApi.Controllers
             return Ok();
         }
 
-        private bool ChildExists(int Id)
+        private bool ChildExists(int id)
         {
-            return _context.Child.Any(e => e.Id == Id);
+            return _context.Child.Any(e => e.Id == id);
         }
     }
 }

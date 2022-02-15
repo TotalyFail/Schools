@@ -20,9 +20,9 @@ namespace SchoolApi.Services
             this._childService = _childService;
         }
 
-        public List<string> GetSchoolByParentName(string Name)
+        public List<string> GetSchoolByParentName(string name)
         {
-            List<int> Parents = _parentService.GetParentsByName(Name);
+            List<int> Parents = _parentService.GetParentsByName(name);
             List<int> Children = _childService.GetChildrenSchools(Parents);
 
             return _context.School.Where(sch => Children.Contains(sch.Id))

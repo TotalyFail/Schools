@@ -14,9 +14,9 @@ namespace SchoolApi.Services
             this._context = _context;
         }
 
-        public List<int> GetChildrenSchools(List<int> ParentIds)
+        public List<int> GetChildrenSchools(List<int> parentIds)
         {
-            return _context.Child.Where(ch => ParentIds.Contains(ch.Parent_Id))
+            return _context.Child.Where(ch => parentIds.Contains(ch.Parent_Id))
                .Select(ch => ch.School_Id)
                .ToList();
         }
