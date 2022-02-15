@@ -7,7 +7,6 @@ namespace SchoolApi.Services
 {
     public class ParentService : IParentService
     {
-
         private SchoolApiContext _context;
 
         public ParentService(SchoolApiContext _context)

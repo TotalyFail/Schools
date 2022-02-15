@@ -12,6 +12,7 @@ namespace SchoolApi.Services
         private ParentService _parentService;
 
         private ChildService _childService;
+
         public SchoolService(SchoolApiContext _context, ParentService _parentService, ChildService _childService)
         {
             this._context = _context;

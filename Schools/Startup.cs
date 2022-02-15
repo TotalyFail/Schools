@@ -21,6 +21,7 @@ namespace SchoolApi
         }
 
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection Services)
         {
             Services.AddControllers();
@@ -28,7 +29,6 @@ namespace SchoolApi
             Services.AddTransient<ParentService>();
             Services.AddTransient<ChildService>();
             Services.AddTransient<SchoolService>();
-
 
             Services.AddDbContext<SchoolApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SchoolApiContext")));

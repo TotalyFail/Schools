@@ -6,7 +6,6 @@ using SchoolApi.Helpers;
 using SchoolApi.Models;
 using SchoolApi.Services;
 
-
 namespace SchoolApi.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -25,7 +24,7 @@ namespace SchoolApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]User Model)
+        public IActionResult Authenticate([FromBody] User Model)
         {
             OperationResult result = _userService.Authenticate(Model);
             if (result.Success == false)

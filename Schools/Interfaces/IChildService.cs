@@ -2,7 +2,7 @@
 
 namespace SchoolApi.Interfaces
 {
-    interface IChildService
+    internal interface IChildService
     {
         public List<int> GetChildrenSchools(List<int> ParentIds);
     }

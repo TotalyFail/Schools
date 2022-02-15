@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SchoolApi.Models
+﻿namespace SchoolApi.Models
 {
     public class Parent
     {

@@ -9,7 +9,6 @@ namespace SchoolApi.Services
     {
         private SchoolApiContext _context;
 
-
         public ChildService(SchoolApiContext _context)
         {
             this._context = _context;

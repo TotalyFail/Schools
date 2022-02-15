@@ -2,7 +2,7 @@
 
 namespace SchoolApi.Interfaces
 {
-    interface ISchoolService
+    internal interface ISchoolService
     {
         List<string> GetSchoolByParentName(string Name);
     }

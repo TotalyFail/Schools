@@ -19,7 +19,6 @@ namespace SchoolApi.Controllers
         private readonly SchoolApiContext _context;
         private readonly SchoolService _schoolService;
 
-
         public SchoolsController(SchoolApiContext _context, SchoolService _schoolService)
         {
             this._context = _context;
@@ -45,7 +44,6 @@ namespace SchoolApi.Controllers
 
             return Ok(Schools);
         }
-
 
         // PUT: api/Schools/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
