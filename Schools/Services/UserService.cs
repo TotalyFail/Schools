@@ -13,16 +13,14 @@ namespace SchoolApi.Services
 {
     public class UserService : IUserService
     {
-        public IConfiguration Configuration { get; }
 
-        public UserService(IConfiguration Configuration)
+        public UserService()
         {
-            this.Configuration = Configuration;
         }
 
         public OperationResult Authenticate([FromBody] User model)
         {
-            User User = new User(Configuration.GetValue<string>("Auth:Username"), Configuration.GetValue<string>("Auth:Password"));
+            User User = new User(AppSettings.Username, AppSettings.Password);
 
             if (User == null)
                 return OperationResult.FailureResult("Username or password is incorrect");

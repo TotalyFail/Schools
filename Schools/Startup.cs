@@ -35,6 +35,8 @@ namespace SchoolApi
 
             var AppSettingsSection = Configuration.GetSection("AppSettings");
             var AppSettings = AppSettingsSection.Get<AppSettings>();
+            AppSettings.Username = Configuration.GetValue<string>("Auth:Username");
+            AppSettings.Password = Configuration.GetValue<string>("Auth:Password");
             var Key = Encoding.ASCII.GetBytes(AppSettings.Secret);
 
             services.AddAuthentication(x =>
