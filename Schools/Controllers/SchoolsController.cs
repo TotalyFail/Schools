@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SchoolsController : ControllerBase

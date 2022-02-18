@@ -5,10 +5,11 @@ using Microsoft.Extensions.Configuration;
 using SchoolApi.Helpers;
 using SchoolApi.Models;
 using SchoolApi.Services;
+using System.Threading.Tasks;
 
 namespace SchoolApi.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -24,8 +25,9 @@ namespace SchoolApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User model)
+        public async Task<IActionResult> Authenticate([FromBody] User model)
         {
+            await Task.Delay(500);
             OperationResult result = _userService.Authenticate(model);
             if (result.Success == false)
                 return BadRequest(result.FailureMessage);
