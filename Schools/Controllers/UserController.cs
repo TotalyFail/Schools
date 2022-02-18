@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using SchoolApi.Helpers;
 using SchoolApi.Models;
 using SchoolApi.Services;
@@ -14,13 +12,11 @@ namespace SchoolApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public IConfiguration Configuration { get; }
         private readonly UserService _userService;
 
-        public UserController(UserService _userService, IConfiguration Configuration)
+        public UserController(UserService _userService)
         {
             this._userService = _userService;
-            this.Configuration = Configuration;
         }
 
         [AllowAnonymous]
